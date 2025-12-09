@@ -1,0 +1,12 @@
+capId,name,dob,gender,district,state,postalCode,email,mobile,parentName,parentContactNo,programme,batch,status,bloodGroup,community,adhaarNumber
+CAP1011,Kevin Hunt,2005-03-14,Male,Palakkad,Kerala,678002,kevin11@example.com,9876543220,Sarah Hunt,9876501244,BSc CS,2023,PRE_REGISTERED,B+,OBC,123456789022
+CAP1012,Sophie Lane,2004-11-28,Female,Kozhikode,Kerala,673002,sophie12@example.com,9876543221,Robert Lane,9876501245,BSc CS,2023,PRE_REGISTERED,AB+,SC,123456789023
+CAP1013,Mark Hill,2005-05-20,Male,Malappuram,Kerala,676502,mark13@example.com,9876543222,Linda Hill,9876501246,BSc CS,2023,PRE_REGISTERED,O-,ST,123456789024
+CAP1014,Nina Rose,2004-08-15,Female,Wayanad,Kerala,673122,nina14@example.com,9876543223,Michael Rose,9876501247,BSc CS,2023,PRE_REGISTERED,A+,General,123456789025
+CAP1015,Tom Baker,2005-12-02,Male,Thrissur,Kerala,680002,tom15@example.com,9876543224,Emily Baker,9876501248,BSc CS,2023,PRE_REGISTERED,B-,OBC,123456789026
+CAP1016,Hannah Fox,2004-02-27,Female,Kollam,Kerala,691002,hannah16@example.com,9876543225,David Fox,9876501249,BSc CS,2023,PRE_REGISTERED,AB-,SC,123456789027
+CAP1017,James Wood,2005-06-18,Male,Thiruvananthapuram,Kerala,695002,james17@example.com,9876543226,Susan Wood,9876501250,BSc CS,2023,PRE_REGISTERED,O+,ST,123456789028
+CAP1018,Clara White,2004-09-30,Female,Kottayam,Kerala,686002,clara18@example.com,9876543227,John White,9876501251,BSc CS,2023,PRE_REGISTERED,A-,General,123456789029
+CAP1019,Daniel Scott,2005-01-11,Male,Ernakulam,Kerala,682002,daniel19@example.com,9876543228,Jessica Scott,9876501252,BSc CS,2023,PRE_REGISTERED,B+,OBC,123456789030
+CAP1020,Olivia Green,2004-04-22,Female,Idukki,Kerala,685002,olivia20@example.com,9876543229,Kevin Green,9876501253,BSc CS,2023,PRE_REGISTERED,AB+,SC,123456789031
+

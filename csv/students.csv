@@ -1,0 +1,12 @@
+capId,name,dob,gender,district,state,postalCode,email,mobile,parentName,parentContactNo,programme,batch,status,bloodGroup,community,adhaarNumber
+CAP1001,John Doe,2005-01-15,Male,Kozhikode,Kerala,673001,john1@example.com,9876543210,Robert Doe,9876501234,BSc CS,2023,PRE_REGISTERED,O+,General,123456789012
+CAP1002,Jane Smith,2004-03-22,Female,Malappuram,Kerala,676501,jane2@example.com,9876543211,Michael Smith,9876501235,BSc CS,2023,PRE_REGISTERED,A+,OBC,123456789013
+CAP1003,Bob Brown,2005-06-10,Male,Wayanad,Kerala,673121,bob3@example.com,9876543212,Susan Brown,9876501236,BSc CS,2023,PRE_REGISTERED,B+,General,123456789014
+CAP1004,Alice Green,2004-12-05,Female,Palakkad,Kerala,678001,alice4@example.com,9876543213,David Green,9876501237,BSc CS,2023,PRE_REGISTERED,AB+,SC,123456789015
+CAP1005,Michael White,2005-02-18,Male,Thrissur,Kerala,680001,michael5@example.com,9876543214,Linda White,9876501238,BSc CS,2023,PRE_REGISTERED,O-,ST,123456789016
+CAP1006,Susan Black,2004-08-30,Female,Kollam,Kerala,691001,susan6@example.com,9876543215,Robert Black,9876501239,BSc CS,2023,PRE_REGISTERED,A-,General,123456789017
+CAP1007,David Gray,2005-11-12,Male,Thiruvananthapuram,Kerala,695001,david7@example.com,9876543216,Emily Gray,9876501240,BSc CS,2023,PRE_REGISTERED,B-,OBC,123456789018
+CAP1008,Linda Blue,2004-05-25,Female,Kottayam,Kerala,686001,linda8@example.com,9876543217,John Blue,9876501241,BSc CS,2023,PRE_REGISTERED,AB-,SC,123456789019
+CAP1009,Robert King,2005-09-17,Male,Ernakulam,Kerala,682001,robert9@example.com,9876543218,Susan King,9876501242,BSc CS,2023,PRE_REGISTERED,O+,ST,123456789020
+CAP1010,Emily Queen,2004-07-09,Female,Idukki,Kerala,685001,emily10@example.com,9876543219,Michael Queen,9876501243,BSc CS,2023,PRE_REGISTERED,A+,General,123456789021
+
