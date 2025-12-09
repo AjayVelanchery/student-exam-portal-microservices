@@ -1,0 +1,45 @@
+# ======================
+# Maven
+# ======================
+target/
+**/target/
+
+# ======================
+# IDEs
+# ======================
+.idea/
+*.iml
+.vscode/
+
+# ======================
+# Logs
+# ======================
+*.log
+
+# ======================
+# Environment files
+# NEVER COMMIT PASSWORDS
+# ======================
+.env
+**/*.env
+application.properties
+application.yml
+**/application.properties
+**/application.yml
+
+# ======================
+# OS files
+# ======================
+.DS_Store
+
+# ======================
+# Node (frontend)
+# ======================
+node_modules/
+dist/
+build/
+
+# ======================
+# Kafka / Redis / Docker temp
+# ======================
+**/.docker
