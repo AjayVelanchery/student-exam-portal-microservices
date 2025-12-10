@@ -1,5 +1,7 @@
 package com.example.auth_service_student_exam.service;
 
+import com.example.auth_service_student_exam.dto.LoginRequest;
+import com.example.auth_service_student_exam.dto.LoginResponse;
 import com.example.auth_service_student_exam.dto.SignupRequest;
 import com.example.auth_service_student_exam.dto.SignupResponse;
 import com.example.auth_service_student_exam.exception.exception.auth.KeycloakUserCreationException;
@@ -158,4 +160,9 @@ public class AuthSignupServiceImpl implements AuthService {
 
     @Override
     public boolean resendPasswordResetOtp(String email) { throw new UnsupportedOperationException(); }
+
+
+    public  LoginResponse login(LoginRequest request){throw new UnsupportedOperationException(); }
+
+
 }

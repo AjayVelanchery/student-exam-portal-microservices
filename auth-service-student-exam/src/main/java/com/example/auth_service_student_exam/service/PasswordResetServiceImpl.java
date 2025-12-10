@@ -1,5 +1,7 @@
 package com.example.auth_service_student_exam.service;
 
+import com.example.auth_service_student_exam.dto.LoginRequest;
+import com.example.auth_service_student_exam.dto.LoginResponse;
 import com.example.auth_service_student_exam.dto.SignupRequest;
 import com.example.auth_service_student_exam.dto.SignupResponse;
 
@@ -114,4 +116,7 @@ public class PasswordResetServiceImpl implements AuthService {
     @Override public boolean verifyOtp(String email, String otp) { throw new UnsupportedOperationException(); }
     @Override public boolean resendOtp(String email) { throw new UnsupportedOperationException(); }
     @Override public SignupResponse signup(SignupRequest request) { throw new UnsupportedOperationException(); }
+    public LoginResponse login(LoginRequest request){throw new UnsupportedOperationException(); }
+
+
 }
