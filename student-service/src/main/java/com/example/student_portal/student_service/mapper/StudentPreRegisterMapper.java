@@ -2,6 +2,7 @@ package com.example.student_portal.student_service.mapper;
 
 import com.example.student_portal.student_service.dto.StudentPreRegisterRequest;
 import com.example.student_portal.student_service.dto.StudentPreRegisterResponse;
+import com.example.student_portal.student_service.dto.StudentProfileResponse;
 import com.example.student_portal.student_service.model.StudentPreRegister;
 
 import java.util.List;
@@ -73,4 +74,28 @@ public class StudentPreRegisterMapper {
                 .map(StudentPreRegisterMapper::toResponse)
                 .toList();
     }
+
+    public static StudentProfileResponse toProfileResponse(StudentPreRegister entity) {
+        return new StudentProfileResponse(
+                entity.getId(),
+                entity.getCapId(),
+                entity.getName(),
+                entity.getDob(),
+                entity.getGender(),
+                entity.getDistrict(),
+                entity.getState(),
+                entity.getPostalCode(),
+                entity.getEmail(),
+                entity.getMobile(),
+                entity.getParentName(),
+                entity.getParentContactNo(),
+                entity.getProgramme(),
+                entity.getBatch(),
+                entity.getBloodGroup(),
+                entity.getCommunity(),
+                entity.getAdhaarNumber(),
+                entity.getStatus()
+        );
+    }
+
 }

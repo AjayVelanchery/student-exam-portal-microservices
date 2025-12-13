@@ -23,13 +23,25 @@ public class AuthController {
 
 
     @PostMapping("/verify-capid")
-    public ResponseEntity<CapIdResponse> verifyCapId(@Valid @RequestBody CapIdRequest request) {
+    public ResponseEntity<CapIdResponse> verifyCapId(
+            @Valid @RequestBody CapIdRequest request) {
+
         boolean valid = authService.verifyCapId(request.getCapId());
-        CapIdResponse response = new CapIdResponse(request.getCapId(), valid,
-                valid ? "CAP ID is valid" : "CAP ID not found");
+
+        CapIdResponse response = new CapIdResponse(
+                request.getCapId(),
+                valid,
+                valid ? "CAP ID is valid" : "CAP ID not found"
+        );
+
+        if (!valid) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(response);
+        }
+
         return ResponseEntity.ok(response);
     }
-
 
 
     @PostMapping("/signup")

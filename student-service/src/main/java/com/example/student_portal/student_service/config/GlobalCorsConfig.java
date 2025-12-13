@@ -13,7 +13,6 @@ import java.util.Arrays;
 @Configuration
 public class GlobalCorsConfig {
 
-    // For Spring MVC (non-reactive endpoints, e.g., your controllers)
     @Bean
     public WebMvcConfigurer webMvcCorsConfigurer() {
         return new WebMvcConfigurer() {
