@@ -1,6 +1,5 @@
 package com.example.student_portal.student_service.service;
 
-
 import com.example.student_portal.student_service.csv.StudentCSVParser;
 import com.example.student_portal.student_service.dto.StudentPreRegisterRequest;
 import com.example.student_portal.student_service.dto.StudentPreRegisterResponse;
@@ -15,15 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class StudentPreRegisterServiceImpl implements StudentPreRegisterService  {
+public class AdminPreRegisterServiceImpl implements AdminPreRegisterService {
 
     private final StudentPreRegisterRepository repository;
     private final StudentPreRegisterProducer producer;
     private final StudentCSVParser csvParser;
+
     @Override
     @Transactional
     public StudentPreRegisterResponse create(StudentPreRegisterRequest request) {
@@ -35,10 +34,7 @@ public class StudentPreRegisterServiceImpl implements StudentPreRegisterService 
     @Override
     @Transactional
     public List<StudentPreRegisterResponse> bulkCreate(List<StudentPreRegisterRequest> requestList) {
-
-
         requestList.forEach(producer::sendAsync);
-
 
         return requestList.stream()
                 .map(req -> new StudentPreRegisterResponse(
@@ -52,21 +48,16 @@ public class StudentPreRegisterServiceImpl implements StudentPreRegisterService 
                 .toList();
     }
 
-
-
+    @Override
     @Transactional
     public void bulkUpload(MultipartFile file) {
         try {
             List<StudentPreRegisterRequest> rows = csvParser.parse(file);
-
-            rows.forEach(row -> producer.sendAsync(row));
-
+            rows.forEach(producer::sendAsync);
         } catch (IOException e) {
             throw new RuntimeException("Failed to parse CSV file");
         }
     }
-
-
 
     @Override
     public StudentPreRegisterResponse update(Long id, StudentPreRegisterRequest request) {
@@ -102,6 +93,5 @@ public class StudentPreRegisterServiceImpl implements StudentPreRegisterService 
     @Override
     public boolean isCapIdValid(String capId) {
         return repository.existsByCapId(capId.trim());
-
     }
 }

@@ -33,7 +33,7 @@ public class AuthSignupServiceImpl implements AuthService {
     private final EmailService emailService;
     private final Keycloak keycloakClient;
 
-    private final String STUDENT_SERVICE_URL = "http://localhost:8084/api/student/api/students";
+    private final String STUDENT_SERVICE_URL = "http://localhost:8084/api/student/student";
     private final String KEYCLOAK_REALM = "Student-Portal";
 
     @Override
@@ -43,10 +43,11 @@ public class AuthSignupServiceImpl implements AuthService {
                 .uri(STUDENT_SERVICE_URL + "/validate/{capId}", capId)
                 .retrieve()
                 .bodyToMono(Boolean.class)
-                .onErrorReturn(false)
                 .block();
-        return exists != null && exists;
+
+        return Boolean.TRUE.equals(exists);
     }
+
 
     @Override
     public boolean sendOtp(String email, String capId) {
