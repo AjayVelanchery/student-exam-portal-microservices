@@ -47,18 +47,17 @@ public class AdminPreRegisterServiceImpl implements AdminPreRegisterService {
                 ))
                 .toList();
     }
-
     @Override
     @Transactional
-    public void bulkUpload(MultipartFile file) {
+    public int bulkUpload(MultipartFile file) {
         try {
             List<StudentPreRegisterRequest> rows = csvParser.parse(file);
             rows.forEach(producer::sendAsync);
+            return rows.size();
         } catch (IOException e) {
-            throw new RuntimeException("Failed to parse CSV file");
+            throw new RuntimeException("Failed to parse CSV file", e);
         }
     }
-
     @Override
     public StudentPreRegisterResponse update(Long id, StudentPreRegisterRequest request) {
         StudentPreRegister entity = repository.findById(id)

@@ -22,5 +22,5 @@ public interface AdminPreRegisterService {
 
     boolean isCapIdValid(String capId);
 
-    void bulkUpload(MultipartFile file);
+    int bulkUpload(MultipartFile file);
 }
