@@ -1,16 +1,12 @@
 package com.example.student_portal.student_service.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class StudentProfileResponse {
-    private Long id;
+public class StudentSelfUpdateRequest {
+
     private String name;
     private LocalDate dob;
     private String gender;
@@ -26,5 +22,4 @@ public class StudentProfileResponse {
     private String bloodGroup;
     private String community;
     private String adhaarNumber;
-
 }

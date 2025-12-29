@@ -1,0 +1,6 @@
+capId,name,dob,gender,district,state,postalCode,email,mobile,parentName,parentContactNo,programme,batch,bloodGroup,community,adhaarNumber
+CAP1030,Anand Pillai,2001-06-11,Male,Kottayam,Kerala,686001,anand1030@gmail.com,9876510300,Sivan Pillai,9876511300,BTech,2020-2024,O+,General,103000000001
+CAP1031,Reshma R,2002-02-24,Female,Kollam,Kerala,691001,reshma1031@gmail.com,9876510301,Raghavan R,9876511301,BSc,2020-2024,A+,OBC,103000000002
+CAP1032,Akhil S,2001-12-09,Male,Kannur,Kerala,670001,akhil1032@gmail.com,9876510302,Suresh S,9876511302,BBA,2020-2024,B+,General,103000000003
+CAP1033,Divya Mohan,2002-04-17,Female,Idukki,Kerala,685501,divya1033@gmail.com,9876510303,Mohan Kumar,9876511303,BA,2020-2024,O-,SC,103000000004
+CAP1034,Kiran R,2001-08-26,Male,Pathanamthitta,Kerala,689645,kiran1034@gmail.com,9876510304,Ramesh R,9876511304,BCom,2020-2024,AB+,ST,103000000005

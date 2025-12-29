@@ -1,5 +1,6 @@
 package com.example.student_portal.student_service.controller;
 
+import com.example.student_portal.student_service.dto.StudentPreRegisterAdminResponse;
 import com.example.student_portal.student_service.dto.StudentPreRegisterRequest;
 import com.example.student_portal.student_service.dto.StudentPreRegisterResponse;
 import com.example.student_portal.student_service.service.AdminPreRegisterService;
@@ -33,9 +34,22 @@ public class AdminController {
     public String bulkUpload(
             @Parameter(description = "CSV file to upload", required = true)
             @RequestPart("file") MultipartFile file) {
-        int total = adminService.bulkUpload(file); // return count of rows processed
+        int total = adminService.bulkUpload(file);
         return "CSV uploaded successfully. Total students processed: " + total;
     }
+
+
+    @PostMapping(value = "/upload-excel", consumes = "multipart/form-data")
+    @Operation(summary = "Bulk upload students via Excel file (.xlsx)")
+    public String bulkUploadExcel(
+            @Parameter(description = "Excel (.xlsx) file to upload", required = true)
+            @RequestPart("file") MultipartFile file) {
+
+        int total = adminService.bulkUploadExcel(file);
+
+        return "Excel uploaded successfully. Total students processed: " + total;
+    }
+
 
 
     @PutMapping("/{id}")
@@ -44,9 +58,19 @@ public class AdminController {
         return adminService.update(id, request);
     }
 
-    @GetMapping("/{id}")
-    public StudentPreRegisterResponse getStudentById(@PathVariable Long id) {
+    @GetMapping("/admin/student/{id}")
+    public StudentPreRegisterAdminResponse getById(
+            @PathVariable Long id) {
+
         return adminService.getById(id);
+    }
+
+
+    @GetMapping("/admin/student/cap/{capId}")
+    public StudentPreRegisterAdminResponse getByCapId(
+            @PathVariable String capId) {
+
+        return adminService.getByCapId(capId);
     }
 
     @GetMapping
@@ -54,10 +78,7 @@ public class AdminController {
         return adminService.getAll();
     }
 
-    @GetMapping("/cap/{capId}")
-    public StudentPreRegisterResponse getStudentByCapId(@PathVariable String capId) {
-        return adminService.getByCapId(capId);
-    }
+
 
     @GetMapping("/validate/{capId}")
     public boolean isCapIdValid(@PathVariable String capId) {

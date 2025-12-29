@@ -1,0 +1,13 @@
+package com.examportal.student_exam_service.repository;
+
+import com.examportal.student_exam_service.model.Exam;
+import com.examportal.student_exam_service.model.ExamRegistration;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ExamRegistrationReposiotry extends JpaRepository<Exam,Long> {
+
+    List<ExamRegistration> findByCapId(String capId);
+
+}
