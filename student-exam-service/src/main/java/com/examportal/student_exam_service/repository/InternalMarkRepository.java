@@ -8,5 +8,11 @@ import java.util.List;
 public interface InternalMarkRepository extends JpaRepository<InternalMark,Long> {
 
     List<InternalMark> findByExamIdAndCapId(Long examId, String capId);
+    boolean existsByExamIdAndCapIdAndSubjectCode(
+            Long examId,
+            String capId,
+            String subjectCode
+    );
 
+    List<InternalMark> findByCapId(String capId);
 }

@@ -12,7 +12,7 @@ import com.example.student_portal.student_service.mapper.StudentPreRegisterMappe
 import com.example.student_portal.student_service.model.StudentPreRegister;
 import com.example.student_portal.student_service.repository.StudentPreRegisterRepository;
 import com.example.student_portal.student_service.service.kafka.StudentPreRegisterProducer;
-import com.example.student_portal.student_service.validation.StudentPreRegisterValidator;
+import com.example.student_portal.student_service.validator.StudentPreRegisterValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -113,6 +113,22 @@ public class AdminPreRegisterServiceImpl implements AdminPreRegisterService {
             throw new CsvProcessingException("Failed to parse CSV file", e);
         }
     }
+
+    @Override
+    public boolean delete(Long id) {
+
+        StudentPreRegister entity = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "StudentPreRegister", "id", id
+                        ));
+
+        repository.delete(entity);
+
+        return true;
+    }
+
+
 
 
     @Override

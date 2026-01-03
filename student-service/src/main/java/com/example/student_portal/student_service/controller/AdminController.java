@@ -7,6 +7,7 @@ import com.example.student_portal.student_service.service.AdminPreRegisterServic
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -65,6 +66,11 @@ public class AdminController {
         return adminService.getById(id);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        adminService.delete(id);
+    }
 
     @GetMapping("/admin/student/cap/{capId}")
     public StudentPreRegisterAdminResponse getByCapId(

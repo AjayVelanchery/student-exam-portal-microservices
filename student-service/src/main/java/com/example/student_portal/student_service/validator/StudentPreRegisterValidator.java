@@ -1,4 +1,4 @@
-package com.example.student_portal.student_service.validation;
+package com.example.student_portal.student_service.validator;
 
 import com.example.student_portal.student_service.dto.StudentPreRegisterRequest;
 import com.example.student_portal.student_service.exception.ValidationException;

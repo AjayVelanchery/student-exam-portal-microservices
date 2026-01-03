@@ -24,4 +24,7 @@ public interface AdminPreRegisterService {
     boolean isCapIdValid(String capId);
 
     int bulkUpload(MultipartFile file);
+
+    boolean delete(Long id);
+
 }

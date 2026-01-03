@@ -5,19 +5,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
+
 @Getter
 @Setter
-public class TimetableRequestDTO {
-    private Long examId;
+public class SubjectExamSlotDTO {
+
     private String subjectCode;
     private String subjectName;
-    private LocalDate examDate;
+
     @JsonFormat(pattern = "HH:mm")
     @Schema(type = "string", example = "10:00", pattern = "HH:mm")
+
     private LocalTime startTime;
+
     @JsonFormat(pattern = "HH:mm")
     @Schema(type = "string", example = "10:00", pattern = "HH:mm")
+
     private LocalTime endTime;
 }

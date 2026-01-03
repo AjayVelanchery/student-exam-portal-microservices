@@ -1,5 +1,6 @@
 package com.examportal.student_exam_service.mapper;
 
+import com.examportal.student_exam_service.dto.SubjectExamSlotDTO;
 import com.examportal.student_exam_service.dto.TimetableRequestDTO;
 import com.examportal.student_exam_service.dto.TimetableResponseDTO;
 import com.examportal.student_exam_service.model.Timetable;
@@ -23,6 +24,15 @@ public class TimetableMapper {
         dto.setSubjectCode(t.getSubjectCode());
         dto.setSubjectName(t.getSubjectName());
         dto.setExamDate(t.getExamDate());
+        dto.setStartTime(t.getStartTime());
+        dto.setEndTime(t.getEndTime());
+        return dto;
+    }
+
+    public static SubjectExamSlotDTO toSubjectSlot(Timetable t) {
+        SubjectExamSlotDTO dto = new SubjectExamSlotDTO();
+        dto.setSubjectCode(t.getSubjectCode());
+        dto.setSubjectName(t.getSubjectName());
         dto.setStartTime(t.getStartTime());
         dto.setEndTime(t.getEndTime());
         return dto;

@@ -28,4 +28,5 @@ public class Timetable {
     private LocalDate examDate;
     private LocalTime startTime;
     private LocalTime endTime;
+
 }

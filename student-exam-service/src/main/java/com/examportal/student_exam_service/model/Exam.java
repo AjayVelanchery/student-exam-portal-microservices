@@ -24,5 +24,5 @@ public class Exam {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    private String status;
+
 }

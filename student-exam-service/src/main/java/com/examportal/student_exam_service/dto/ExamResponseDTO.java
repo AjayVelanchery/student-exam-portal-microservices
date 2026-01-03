@@ -13,5 +13,5 @@ public class ExamResponseDTO {
     private Integer semester;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String status;
+
 }

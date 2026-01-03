@@ -13,8 +13,9 @@ public class ExamMapper {
         exam.setSemester(dto.getSemester());
         exam.setStartDate(dto.getStartDate());
         exam.setEndDate(dto.getEndDate());
-        exam.setStatus("DRAFT");
+
         return exam;
+
     }
 
     public static ExamResponseDTO toDTO(Exam exam) {
@@ -25,7 +26,15 @@ public class ExamMapper {
         dto.setSemester(exam.getSemester());
         dto.setStartDate(exam.getStartDate());
         dto.setEndDate(exam.getEndDate());
-        dto.setStatus(exam.getStatus());
+
         return dto;
+    }
+
+    public static void updateEntity(Exam exam, ExamRequestDTO dto) {
+        exam.setName(dto.getName());
+        exam.setCourse(dto.getCourse());
+        exam.setSemester(dto.getSemester());
+        exam.setStartDate(dto.getStartDate());
+        exam.setEndDate(dto.getEndDate());
     }
 }
