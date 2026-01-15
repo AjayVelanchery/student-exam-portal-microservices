@@ -1,7 +1,7 @@
 package com.example.auth_service_student_exam.service;
 
-import com.example.auth_service_student_exam.dto.SignupRequest;
-import com.example.auth_service_student_exam.dto.SignupResponse;
+import com.example.auth_service_student_exam.dto.*;
+import com.example.auth_service_student_exam.exception.exception.auth.InvalidCredentialsException;
 import com.example.auth_service_student_exam.exception.exception.auth.KeycloakUserCreationException;
 import com.example.auth_service_student_exam.exception.exception.auth.UserAlreadyVerifiedException;
 import com.example.auth_service_student_exam.exception.exception.auth.UserNotVerifiedException;
@@ -17,6 +17,7 @@ import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.Collections;
 
@@ -92,6 +93,8 @@ public class AuthSignupServiceImpl implements AuthService {
         return sendOtp(email, user.getCapId());
     }
 
+
+
     @Override
     @Transactional
     public SignupResponse signup(SignupRequest request) {
@@ -147,6 +150,44 @@ public class AuthSignupServiceImpl implements AuthService {
 
         return keycloakId;
     }
+    @Override
+    public LoginResponse login(LoginRequest request) {
+
+        AuthUser user = authUserRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new UserNotVerifiedException("User not registered"));
+
+        if (!user.isVerified()) {
+            throw new UserNotVerifiedException("Email not verified");
+        }
+
+        KeycloakTokenResponse tokenResponse = webClientBuilder.build()
+                .post()
+                .uri("http://localhost:8080/realms/" + KEYCLOAK_REALM + "/protocol/openid-connect/token")
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .bodyValue(
+                        "grant_type=password" +
+                                "&client_id=api-gateway" +
+                                "&scope=openid" +
+                                "&username=" + request.getEmail() +
+                                "&password=" + request.getPassword()
+                )
+                .retrieve()
+                .onStatus(
+                        status -> status.value() == 401,
+                        response -> Mono.error(
+                                new InvalidCredentialsException("Invalid email or password")
+                        )
+                )
+                .bodyToMono(KeycloakTokenResponse.class)
+                .block();
+
+        return LoginResponse.builder()
+                .accessToken(tokenResponse.getAccessToken())
+                .refreshToken(tokenResponse.getRefreshToken())
+                .expiresIn(tokenResponse.getExpiresIn())
+                .build();
+    }
+
 
     @Override
     public boolean sendPasswordResetOtp(String email) { throw new UnsupportedOperationException(); }

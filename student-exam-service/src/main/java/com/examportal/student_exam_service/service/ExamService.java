@@ -17,6 +17,6 @@ public interface ExamService {
     ExamResponseDTO updateExam(Long examId, ExamRequestDTO requestDTO);
 
 
-    void deleteExam(Long examId);
+
 
 }

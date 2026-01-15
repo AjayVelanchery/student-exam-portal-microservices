@@ -4,6 +4,7 @@ import com.examportal.student_exam_service.dto.SemesterExamDateResponseDTO;
 import com.examportal.student_exam_service.dto.SubjectExamSlotDTO;
 import com.examportal.student_exam_service.dto.TimetableRequestDTO;
 import com.examportal.student_exam_service.dto.TimetableResponseDTO;
+import com.examportal.student_exam_service.exception.ResourceNotFoundException;
 import com.examportal.student_exam_service.mapper.TimetableMapper;
 import com.examportal.student_exam_service.model.Exam;
 import com.examportal.student_exam_service.model.Timetable;
@@ -24,6 +25,16 @@ public class TimetableServiceImpl implements TimetableService {
 
     private final TimetableRepository repository;
     private final ExamRepository examRepository;
+
+
+    private void validateExamId(Long examId) {
+        if (!examRepository.existsById(examId)) {
+            throw new ResourceNotFoundException(
+                    "Exam", "id", examId
+            );
+        }
+    }
+
     @Override
     public TimetableResponseDTO addTimetable(
             Long examId,
@@ -32,7 +43,7 @@ public class TimetableServiceImpl implements TimetableService {
 
         if (examId == null) {
             throw new IllegalArgumentException("Exam ID is required");
-        }
+        } validateExamId(examId);
 
         if (requestDTO.getSubjectCode() == null || requestDTO.getSubjectCode().isBlank()) {
             throw new IllegalArgumentException("Subject code is required");
@@ -118,5 +129,60 @@ public class TimetableServiceImpl implements TimetableService {
                 })
                 .toList();
     }
+
+    @Override
+    public TimetableResponseDTO updateTimetable(
+            Long id,
+            TimetableRequestDTO requestDTO
+    ) {
+        if (id == null) {
+            throw new IllegalArgumentException("Timetable ID is required");
+        }
+
+        Timetable timetable = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Timetable", "id", id
+                        )
+                );
+
+        if (requestDTO.getExamDate() != null) {
+            timetable.setExamDate(requestDTO.getExamDate());
+        }
+
+        if (requestDTO.getStartTime() != null) {
+            timetable.setStartTime(requestDTO.getStartTime());
+        }
+
+        if (requestDTO.getEndTime() != null) {
+            timetable.setEndTime(requestDTO.getEndTime());
+        }
+
+        if (requestDTO.getSubjectCode() != null &&
+                !requestDTO.getSubjectCode().isBlank()) {
+            timetable.setSubjectCode(requestDTO.getSubjectCode());
+        }
+
+        Timetable updated = repository.save(timetable);
+
+        return TimetableMapper.toResponse(updated);
+    }
+    @Override
+    public void deleteTimetable(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Timetable ID is required");
+        }
+
+        Timetable timetable = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Timetable", "id", id
+                        )
+                );
+
+        repository.delete(timetable);
+    }
+
 
 }

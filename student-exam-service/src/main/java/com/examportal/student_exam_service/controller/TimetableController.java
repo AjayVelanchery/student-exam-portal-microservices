@@ -40,6 +40,19 @@ public class TimetableController {
                 .getExamDatesByCourseAndSemester(course, semester);
     }
 
+    @PutMapping("/{id}")
+    public TimetableResponseDTO updateTimetable(
+            @PathVariable Long id,
+            @RequestBody TimetableRequestDTO requestDTO
+    ) {
+        return timetableService.updateTimetable(id, requestDTO);
+    }
 
+    @DeleteMapping("/{id}")
+    public void deleteTimetable(
+            @PathVariable Long id
+    ) {
+        timetableService.deleteTimetable(id);
+    }
 
 }

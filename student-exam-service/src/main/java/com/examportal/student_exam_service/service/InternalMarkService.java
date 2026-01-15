@@ -27,5 +27,6 @@ public interface InternalMarkService {
     );
 
     void deleteInternalMark(Long id);
+    List<InternalMarkResponseDTO> getInternalMarksForAdmin(String capId);
 
 }

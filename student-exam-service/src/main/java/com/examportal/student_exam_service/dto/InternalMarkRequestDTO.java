@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InternalMarkRequestDTO {
-    private Long examId;
+
     private String capId;
     private String subjectCode;
     private Integer marks;

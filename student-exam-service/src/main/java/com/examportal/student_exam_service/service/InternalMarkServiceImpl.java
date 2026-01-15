@@ -5,10 +5,12 @@ import com.examportal.student_exam_service.dto.InternalMarkResponseDTO;
 import com.examportal.student_exam_service.exception.ResourceNotFoundException;
 import com.examportal.student_exam_service.mapper.InternalMarkMapper;
 import com.examportal.student_exam_service.model.InternalMark;
+import com.examportal.student_exam_service.repository.ExamRepository;
 import com.examportal.student_exam_service.repository.InternalMarkRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,8 +21,33 @@ import java.util.List;
 public class InternalMarkServiceImpl implements InternalMarkService {
 
     private final InternalMarkRepository repository;
+    private final ExamRepository examRepository;
+    private final WebClient.Builder webClientBuilder;
+
+    private final String STUDENT_SERVICE_URL =
+            "http://localhost:8084/api/student/student";
 
 
+    public boolean verifyCapId(String capId) {
+
+        Boolean exists = webClientBuilder.build()
+                .get()
+                .uri(STUDENT_SERVICE_URL + "/validate/{capId}", capId)
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+
+        return Boolean.TRUE.equals(exists);
+    }
+
+
+    private void validateExamId(Long examId) {
+        if (!examRepository.existsById(examId)) {
+            throw new ResourceNotFoundException(
+                    "Exam", "id", examId
+            );
+        }
+    }
 
     @Override
     public InternalMarkResponseDTO addInternalMark(
@@ -31,18 +58,26 @@ public class InternalMarkServiceImpl implements InternalMarkService {
         if (examId == null) {
             throw new IllegalArgumentException("Exam ID is required");
         }
+        validateExamId(examId);
 
         if (requestDTO.getCapId() == null || requestDTO.getCapId().isBlank()) {
             throw new IllegalArgumentException("CAP ID is required");
+        }
+
+
+        if (!verifyCapId(requestDTO.getCapId().trim())) {
+            throw new IllegalArgumentException("Invalid CAP ID");
         }
 
         if (requestDTO.getSubjectCode() == null || requestDTO.getSubjectCode().isBlank()) {
             throw new IllegalArgumentException("Subject code is required");
         }
 
+
         if (requestDTO.getMarks() == null) {
             throw new IllegalArgumentException("Marks are required");
         }
+
 
         boolean alreadyExists =
                 repository.existsByExamIdAndCapIdAndSubjectCode(
@@ -77,6 +112,7 @@ public class InternalMarkServiceImpl implements InternalMarkService {
             throw new IllegalArgumentException("Exam ID is required");
         }
 
+        validateExamId(examId);
         if (file == null || file.isEmpty()) {
             throw new IllegalArgumentException("CSV file is required");
         }
@@ -159,6 +195,30 @@ public class InternalMarkServiceImpl implements InternalMarkService {
                 );
 
         repository.delete(mark);
+    }
+    @Override
+    public List<InternalMarkResponseDTO> getInternalMarksForAdmin(String capId) {
+
+        List<InternalMark> marks;
+
+        if (capId == null || capId.trim().isEmpty()) {
+            marks = repository.findAll();
+        }
+        else {
+            marks = repository.findByCapId(capId.trim());
+
+            if (marks.isEmpty()) {
+                throw new ResourceNotFoundException(
+                        "InternalMarks",
+                        "capId",
+                        capId
+                );
+            }
+        }
+
+        return marks.stream()
+                .map(InternalMarkMapper::toResponse)
+                .toList();
     }
 
 

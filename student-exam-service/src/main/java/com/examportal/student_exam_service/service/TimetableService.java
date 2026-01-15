@@ -20,4 +20,9 @@ public interface TimetableService {
             String course,
             Integer semester
     );
+
+
+    TimetableResponseDTO updateTimetable(Long id, TimetableRequestDTO requestDTO);
+
+    void deleteTimetable(Long id);
 }

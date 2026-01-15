@@ -46,7 +46,7 @@ public class InternalMarkController {
                 .body("Internal marks uploaded successfully");
     }
 
-    @GetMapping("/me")
+    @GetMapping("/student")
     public ResponseEntity<List<InternalMarkResponseDTO>> getMyInternalMarks(
             @RequestHeader("X-Cap-Id") String capId
     ) {
@@ -69,6 +69,15 @@ public class InternalMarkController {
     ) {
         service.deleteInternalMark(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/admin")
+    public ResponseEntity<List<InternalMarkResponseDTO>> getInternalMarksForAdmin(
+            @RequestParam(required = false) String capId
+    ) {
+        return ResponseEntity.ok(
+                service.getInternalMarksForAdmin(capId)
+        );
     }
 
 

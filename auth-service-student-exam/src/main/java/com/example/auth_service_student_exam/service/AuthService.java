@@ -14,7 +14,7 @@ public interface AuthService {
     boolean sendOtp(String email, String capId);  // updated to include capId
     boolean verifyOtp(String email, String otp);
     boolean resendOtp(String email);
-
+    LoginResponse login(LoginRequest request);
     boolean sendPasswordResetOtp(String email);
     boolean verifyPasswordResetOtp(String email, String otp);
     boolean resetPassword(String email, String newPassword);

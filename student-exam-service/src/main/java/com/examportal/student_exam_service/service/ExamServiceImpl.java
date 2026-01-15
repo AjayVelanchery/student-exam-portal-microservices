@@ -62,15 +62,6 @@ public class ExamServiceImpl implements ExamService {
     }
 
 
-    @Override
-    public void deleteExam(Long examId) {
 
-        Exam exam = examRepository.findById(examId)
-                .orElseThrow(() ->
-                        new EntityNotFoundException("Exam not found with id: " + examId)
-                );
-
-        examRepository.delete(exam);
-    }
 
 }

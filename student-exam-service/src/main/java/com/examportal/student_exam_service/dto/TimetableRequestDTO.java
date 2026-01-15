@@ -10,7 +10,8 @@ import java.time.LocalTime;
 @Getter
 @Setter
 public class TimetableRequestDTO {
-    private Long examId;
+
+    
     private String subjectCode;
     private String subjectName;
     private LocalDate examDate;

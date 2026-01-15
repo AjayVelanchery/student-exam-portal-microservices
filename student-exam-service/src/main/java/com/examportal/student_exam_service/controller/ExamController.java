@@ -58,11 +58,6 @@ public class ExamController {
     }
 
 
-    @DeleteMapping("/{examId}")
-    public ResponseEntity<Void> deleteExam(
-            @PathVariable Long examId) {
 
-        examService.deleteExam(examId);
-        return ResponseEntity.noContent().build(); // 204
-    }
+
 }

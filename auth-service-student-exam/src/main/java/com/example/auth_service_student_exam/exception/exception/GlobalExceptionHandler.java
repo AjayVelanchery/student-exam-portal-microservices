@@ -1,6 +1,7 @@
 package com.example.auth_service_student_exam.exception;
 
 import com.example.auth_service_student_exam.exception.exception.auth.AuthServiceException;
+import com.example.auth_service_student_exam.exception.exception.auth.InvalidCredentialsException;
 import com.example.auth_service_student_exam.exception.exception.passwordreset.InvalidOtpException;
 import com.example.auth_service_student_exam.exception.exception.passwordreset.OtpGenerationFailedException;
 import com.example.auth_service_student_exam.exception.exception.passwordreset.PasswordResetFailedException;
@@ -25,6 +26,20 @@ public class GlobalExceptionHandler {
         body.put("error", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.valueOf(ex.getStatus()));
     }
+
+
+        @ExceptionHandler(InvalidCredentialsException.class)
+        public ResponseEntity<Map<String, Object>> handleInvalidCredentials(
+                InvalidCredentialsException ex
+        ) {
+            Map<String, Object> body = new HashMap<>();
+            body.put("timestamp", LocalDateTime.now());
+            body.put("status", 401);
+            body.put("error", ex.getMessage());
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);
+        }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneralException(Exception ex) {
